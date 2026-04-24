@@ -20,7 +20,13 @@ lazy val root = project
   )
 
 def GrpcProject(projectName: String) =
-  Project(projectName, file(projectName)).settings(compiler)
+  Project(projectName, file(projectName))
+    .settings(compiler)
+    .settings(
+      libraryDependencies ++= Seq(
+        "ch.qos.logback" % "logback-classic" % "1.5.32" % Runtime
+      )
+    )
 
 lazy val http4sGrpc = GrpcProject("http4s-grpc")
   .enablePlugins(Http4sGrpcPlugin)
@@ -32,8 +38,7 @@ lazy val http4sGrpc = GrpcProject("http4s-grpc")
     libraryDependencies ++= Seq(
       "org.http4s"           %% "http4s-ember-server" % "0.23.34",
       "org.http4s"           %% "http4s-ember-client" % "0.23.34",
-      "com.thesamet.scalapb" %% "scalapb-runtime"     % scalapb.compiler.Version.scalapbVersion % "protobuf",
-      "ch.qos.logback"        % "logback-classic"     % "1.5.32"                                % Runtime
+      "com.thesamet.scalapb" %% "scalapb-runtime"     % scalapb.compiler.Version.scalapbVersion % "protobuf"
     )
   )
 
