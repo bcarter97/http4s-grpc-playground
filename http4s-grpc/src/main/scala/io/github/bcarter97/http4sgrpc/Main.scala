@@ -13,7 +13,7 @@ object Main extends IOApp.Simple {
 
   override def run: IO[Unit] = {
     val routes = Greeter.toRoutes(GreeterServer[IO])
-    server(routes).useForever
+    server[IO](routes).useForever
   }
 
   private def server[F[_] : Async : Network](routes: HttpRoutes[F]) =

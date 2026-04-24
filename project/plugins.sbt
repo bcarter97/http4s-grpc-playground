@@ -1,5 +1,7 @@
-addSbtPlugin("org.http4s"    % "sbt-http4s-grpc" % "0.3.0")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.6.0")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.14.6")
+addSbtPlugin("org.typelevel" % "sbt-tpolecat" % "0.5.3")
+
 addSbtPlugin("com.thesamet"  % "sbt-protoc"      % "1.0.8")
-addSbtPlugin("org.scalameta" % "sbt-scalafmt"    % "2.6.0")
-addSbtPlugin("ch.epfl.scala" % "sbt-scalafix"    % "0.14.6")
-addSbtPlugin("org.typelevel" % "sbt-tpolecat"    % "0.5.3")
+addSbtPlugin("org.http4s"    % "sbt-http4s-grpc" % "0.3.0")
+addSbtPlugin("org.typelevel" % "sbt-fs2-grpc"    % "3.0.0")
