@@ -19,18 +19,20 @@ object Main extends IOApp.Simple {
         reply <- greeter.sayHello(HelloRequest("World"), Headers.empty)
         _     <- IO.println(s"unaryToUnary: ${reply.message}")
 
-        iShouldNotBeEmittedAndElement1ShouldBeFlushed = Stream.never[IO]
+        // Send "Alice", wait for the server to respond, then send "Bob", i.e. next request depends on the previous response
+        result <- Deferred[IO, Unit].flatMap { gotFirstReply =>
+                    val requests = Stream.emit(HelloRequest("Alice")) ++
+                      Stream.eval(gotFirstReply.get.as(HelloRequest("Bob")))
 
-        result <- greeter
-                    .sayHelloStreamToStream(
-                      Stream.emit(HelloRequest("Alice")) ++ iShouldNotBeEmittedAndElement1ShouldBeFlushed,
-                      Headers.empty
-                    )
-                    .head
-                    .compile
-                    .lastOrError
-                    .timeout(5.seconds)
-                    .attempt
+                    greeter
+                      .sayHelloStreamToStream(requests, Headers.empty)
+                      .head
+                      .evalTap(_ => gotFirstReply.complete(()).void)
+                      .compile
+                      .lastOrError
+                      .timeout(5.seconds)
+                      .attempt
+                  }
         _      <- result match {
                     case Right(r) => IO.println(s"streamToStream: ${r.message}")
                     case Left(_)  => IO.println("streamToStream: timed out waiting for first response")
