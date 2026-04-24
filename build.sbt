@@ -47,7 +47,8 @@ lazy val fs2Grpc = GrpcProject("fs2-grpc")
   .settings(
     name := "fs2-grpc",
     libraryDependencies ++= Seq(
-      "io.grpc" % "grpc-netty-shaded" % scalapb.compiler.Version.grpcJavaVersion
+      "io.grpc" % "grpc-netty-shaded" % scalapb.compiler.Version.grpcJavaVersion,
+      "io.grpc" % "grpc-services"     % scalapb.compiler.Version.grpcJavaVersion
     )
   )
 

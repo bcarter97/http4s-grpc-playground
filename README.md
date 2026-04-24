@@ -12,11 +12,22 @@ Testing differences between fs2-grpc and http4s-grpc.
 sbt "http4s-grpc/run"
 ```
 
+```text
+grpcurl -plaintext \
+  -d '{"name": "world"}' \
+  localhost:4770 \
+  io.github.bcarter97.Greeter/SayHello
+```
+
 #### fs2-grpc
 
 ```shell
 sbt "fs2-grpc/run"
 ```
+
+> [!NOTE]
+>
+> Needs proto path
 
 ```text
 grpcurl -plaintext \

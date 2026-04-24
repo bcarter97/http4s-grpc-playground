@@ -7,6 +7,7 @@ import io.github.bcarter97.greeter.Greeter
 import io.github.bcarter97.http4sgrpc.greeter.GreeterServer
 import org.http4s.HttpRoutes
 import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.server.Server
 import org.http4s.syntax.all.*
 
 object Main extends IOApp.Simple {
@@ -16,7 +17,7 @@ object Main extends IOApp.Simple {
     server[IO](routes).useForever
   }
 
-  private def server[F[_] : Async : Network](routes: HttpRoutes[F]) =
+  private def server[F[_] : Async : Network](routes: HttpRoutes[F]): Resource[F, Server] =
     EmberServerBuilder
       .default[F]
       .withHost(host"localhost")
