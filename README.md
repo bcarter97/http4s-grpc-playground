@@ -6,10 +6,10 @@ Testing differences between fs2-grpc and http4s-grpc.
 
 ### Running
 
-#### http4s-grpc
+#### fs2-grpc
 
 ```shell
-sbt "http4s-grpc/run"
+sbt "fs2-grpc/run"
 ```
 
 ```text
@@ -19,15 +19,15 @@ grpcurl -plaintext \
   io.github.bcarter97.Greeter/SayHello
 ```
 
-#### fs2-grpc
+#### http4s-grpc
 
 ```shell
-sbt "fs2-grpc/run"
+sbt "http4s-grpc/run"
 ```
 
 > [!NOTE]
 >
-> Needs proto path
+> No reflection, needs proto path
 
 ```text
 grpcurl -plaintext \
