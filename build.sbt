@@ -37,8 +37,8 @@ lazy val http4sGrpc = GrpcProject("http4s-grpc")
       scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
     ),
     libraryDependencies ++= Seq(
-      "org.http4s" %% "http4s-ember-server" % "0.23.34",
-      "org.http4s" %% "http4s-ember-client" % "0.23.34"
+      "org.http4s" %% "http4s-ember-server" % "0.23-4aee30a-SNAPSHOT",
+      "org.http4s" %% "http4s-ember-client" % "0.23-4aee30a-SNAPSHOT"
     )
   )
 
